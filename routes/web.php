@@ -2,19 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LanguageController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AppsController;
-use App\Http\Controllers\UserInterfaceController;
-use App\Http\Controllers\CardsController;
-use App\Http\Controllers\ComponentsController;
-use App\Http\Controllers\ExtensionController;
-use App\Http\Controllers\PageLayoutController;
-use App\Http\Controllers\FormsController;
-use App\Http\Controllers\TableController;
-use App\Http\Controllers\PagesController;
-use App\Http\Controllers\MiscellaneousController;
+use App\Helpers\Helper;
 use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\ChartsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +16,45 @@ use App\Http\Controllers\ChartsController;
 |
 */
 
-// Main Page Route
-Route::get('/', function () {
-    return view('content.dashboard.dashboard-ecommerce');
-})->name('dashboard');
+Route::redirect('/', '/dashboard/');
+
+/**
+ * Routes for services pages (auth, register, email confirm and other...)
+ */
+Route::prefix('/service')->group(function () {
+    $pageData = [
+        'header' => false,
+        'breadcrumbs' => [
+            false,
+            'items' => [],
+        ],
+    ];
+
+    Route::get('/authorization', function () use ($pageData) {
+        return view('service.auth', compact('pageData'));
+    });
+
+    Route::get('/registration', function () use ($pageData) {
+        return view('service.register', compact('pageData'));
+    });
+});
+
+/**
+ * Routes for dashboard pages
+ */
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    $pageData = [
+        'header' => true,
+        'breadcrumbs' => [
+            true,
+            'items' => [],
+        ],
+    ];
+
+    Route::get('/', function () use ($pageData) {
+        return view('profile.dashboard', compact('pageData'));
+    });
+});
 
 // locale Route
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
@@ -38,3 +62,7 @@ Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 Route::get('add', function () {
     return "Hello deploy) 2d";
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
