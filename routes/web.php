@@ -36,5 +36,5 @@ Route::get('/', function () {
 Route::get('lang/{locale}', [LanguageController::class, 'swap']);
 
 Route::get('add', function () {
-    return "Hello deploy) 2";
+    return "Hello deploy) 2d";
 });
