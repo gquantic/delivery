@@ -19,4 +19,4 @@ jobs:
       - run: npm ci
       - run: npm run build
       # Deploy
-      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . h96325@hostru04.fornex.org:/home/h96325/public_html/gapurovich.ru
+      - run: rsync -e "ssh -p 20022 -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . h96325.hostde32.fornex.host:/home/h96325/public_html/gapurovich.ru
