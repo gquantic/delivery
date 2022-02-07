@@ -8,13 +8,12 @@ data-asset-path="{{ asset('/')}}">
   @include('panels.navbar')
   <!-- END: Header-->
 
-  <!-- BEGIN: Main Menu-->
-  @if((isset($configData['showMenu']) && $configData['showMenu'] === true))
+  <!-- BEGIN: Main Menu HEADER-->
   @include('panels.sidebar')
-  @endif
+
   <!-- END: Main Menu-->
 
-  <!-- BEGIN: Content-->
+  <!-- BEGIN: Content КОНТЕНТ СТРАНИЦЫ-->
   <div class="app-content content {{ $configData['pageClass'] }}">
     <!-- BEGIN: Header-->
     <div class="content-overlay"></div>
@@ -38,6 +37,8 @@ data-asset-path="{{ asset('/')}}">
       </div>
     </div>
     @else
+
+
     <div class="content-wrapper {{ $configData['layoutWidth'] === 'boxed' ? 'container-xxl p-0' : '' }}">
       {{-- Include Breadcrumb --}}
       @if($configData['pageHeader'] === true && isset($configData['pageHeader']))
@@ -45,7 +46,7 @@ data-asset-path="{{ asset('/')}}">
       @endif
 
       <div class="content-body">
-        {{-- Include Page Content --}}
+        {{-- Главный контент --}}
         @yield('content')
       </div>
     </div>

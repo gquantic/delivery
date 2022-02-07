@@ -33,6 +33,7 @@ data-textdirection="{{ env('MIX_CONTENT_DIRECTION') === 'rtl' ? 'rtl' : 'ltr' }}
 
 <!-- BEGIN: Body-->
 @isset($configData["mainLayoutType"])
-@extends((( $configData["mainLayoutType"] === 'horizontal') ? 'layouts.horizontalLayoutMaster' :
-'layouts.verticalLayoutMaster' ))
+{{--@extends((( $configData["mainLayoutType"] === 'horizontal') ? 'layouts.horizontalLayoutMaster' :--}}
+{{--'layouts.verticalLayoutMaster' ))--}}
+    @extends('layouts.verticalLayoutMaster')
 @endisset
